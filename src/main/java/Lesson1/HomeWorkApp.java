@@ -1,6 +1,13 @@
 package Lesson1;
 
 public class HomeWorkApp {
+    public static void main(String[] args) {
+        printThreeWords();
+        checkSumSign();
+        printColor();
+        compareNumbers();
+    }
+
     public static void printThreeWords() {
         System.out.println ("Orange\nBanana\nApple");
     }
@@ -32,12 +39,5 @@ public class HomeWorkApp {
         } else {
             System.out.print ("a < b");
         }
-    }
-
-    public static void main(String[] args) {
-        printThreeWords();
-        checkSumSign();
-        printColor();
-        compareNumbers();
     }
 }
