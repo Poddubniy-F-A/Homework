@@ -83,41 +83,29 @@ public class Homework_4 {
         map[x][y] = DOT_X;
     }
 
-    public static boolean checkHorizontal(char symbol) {
+    public static boolean checkHorizontalsAndVerticals(char symbol) {
         for (int i = 0; i < SIZE; i++) {
-            int counter = 0;
+            int counterH = 0, counterV = 0;
             for (int j = 0; j < SIZE; j++) {
                 if (map[i][j] == symbol) {
-                    counter++;
-                    if (counter == DOTS_TO_WIN) {
-                        return true;
-                    }
+                    counterH++;
                 } else {
-                    counter = 0;
+                    counterH = 0;
                 }
-            }
-        }
-        return false;
-    }
-
-    public static boolean checkVertical(char symbol) {
-        for (int i = 0; i < SIZE; i++) {
-            int counter = 0;
-            for (int j = 0; j < SIZE; j++) {
                 if (map[j][i] == symbol) {
-                    counter++;
-                    if (counter == DOTS_TO_WIN) {
-                        return true;
-                    }
+                    counterV++;
                 } else {
-                    counter = 0;
+                    counterV = 0;
+                }
+                if (counterH == DOTS_TO_WIN || counterV == DOTS_TO_WIN) {
+                    return true;
                 }
             }
         }
         return false;
     }
 
-    public static boolean checkDiagonal(char symbol) {
+    public static boolean checkDiagonals(char symbol) {
         for (int i = 0; i < SIZE - DOTS_TO_WIN + 1; i++) {
             int counter_lower_left = 0, counter_higher_left = 0, counter_higher_right = 0, counter_lower_right = 0;
             for (int j = 0; j < SIZE - i; j++) {
@@ -151,7 +139,7 @@ public class Homework_4 {
     }
 
     public static boolean checkWin(char symbol) {
-        return checkHorizontal(symbol) || checkVertical(symbol) || checkDiagonal(symbol);
+        return checkHorizontalsAndVerticals(symbol) || checkDiagonals(symbol);
     }
 
     public static boolean isMapFull() {
