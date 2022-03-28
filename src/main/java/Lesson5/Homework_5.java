@@ -15,7 +15,7 @@ public class Homework_5 {
                 "BibopCB@yandex.com", "+7 926 092 4389", 22500, 49);
         for (int i = 0; i < 5; i++) {
             if (staff[i].age > 40) {
-                staff[i].Print();
+                staff[i].print();
                 System.out.println();
             }
         }
