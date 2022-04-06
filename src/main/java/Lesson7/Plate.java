@@ -7,18 +7,16 @@ public class Plate {
         this.food = food;
     }
 
-    public boolean decreaseFood(int n) {
-        if (food >= n) {
-            food -= n;
-            return true;
-        } else {
-            System.out.println("Для кошки недосаточно еды в миске");
-            return false;
-        }
+    public boolean isEnoughFood(int volume) {
+        return food >= volume;
     }
 
-    public void increaseFood(int n) {
-        food += n;
+    public void decreaseFood(int volume) {
+        food -= volume;
+    }
+
+    public void increaseFood(int volume) {
+        food += volume;
     }
 
     public void info() {

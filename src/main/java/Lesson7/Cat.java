@@ -3,7 +3,7 @@ package Lesson7;
 public class Cat {
     private final String name;
     private final int appetite;
-    private boolean satiety = false;
+    private boolean satiety;
 
     public Cat(String name, int appetite) {
         this.name = name;
@@ -11,8 +11,9 @@ public class Cat {
     }
 
     public void eat(Plate p) {
-        if (p.decreaseFood(appetite)) {
+        if (p.isEnoughFood(appetite)) {
             satiety = true;
+            p.decreaseFood(appetite);
         }
     }
 
