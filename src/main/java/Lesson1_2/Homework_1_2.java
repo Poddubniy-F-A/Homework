@@ -18,10 +18,8 @@ public class Homework_1_2 {
         obstacles[5] = new Track(190);
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                if (obstacles[j] instanceof Wall) {
-                    participants[i].highJump(obstacles[j]);
-                } else {
-                    participants[i].longJump(obstacles[j]);
+                if(!obstacles[j].overcoming(participants[i])) {
+                    break;
                 }
             }
             System.out.println();

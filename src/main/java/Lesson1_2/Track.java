@@ -8,7 +8,13 @@ public class Track implements Obstacle{
     }
 
     @Override
-    public int size() {
-        return length;
+    public boolean overcoming(Participant participant) {
+        if (length <= participant.maxObstacleLength()) {
+            System.out.println(participant.name() + " has run " + length + " m");
+            return true;
+        } else {
+            System.out.println(participant.name() + " has stopped");
+            return false;
+        }
     }
 }
