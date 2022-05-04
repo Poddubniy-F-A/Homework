@@ -10,9 +10,9 @@ public class Homework_3_2 {
                 "У", "попа", "была", "собака", "он", "ее", "любил", "она", "съела", "кусок", "мяса", "он", "ее", "убил"
         };
         Map<String, Integer> map = new HashMap<>();
-        for (int i = 0; i < 14; i++) {
-            Integer repeats = map.getOrDefault(stringArray[i], 0);
-            map.put(stringArray[i], repeats + 1);
+        for (String s : stringArray) {
+            Integer repeats = map.getOrDefault(s, 0);
+            map.put(s, repeats + 1);
         }
         for (Map.Entry<String, Integer> element : map.entrySet()) {
             System.out.println("Слово '" + element.getKey() + "' встречается " + element.getValue() + " раз(а)");
