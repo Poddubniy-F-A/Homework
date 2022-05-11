@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chat.Controller">
+   <top>
+      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Chat" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Label>
+   </top>
+   <bottom>
+      <HBox prefHeight="26.0" BorderPane.alignment="CENTER">
+         <TextField fx:id="messageTextField" prefHeight="26.0" prefWidth="535.0">
+            <HBox.margin>
+               <Insets left="5.0" right="5.0"/>
+            </HBox.margin>
+         </TextField>
+         <Button fx:id="sendButton" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#send"
+                 text="Send">
+            <HBox.margin>
+               <Insets left="5.0"/>
+            </HBox.margin>
+         </Button>
+      </HBox>
+   </bottom>
+   <center>
+      <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+            <TextArea fx:id="chatTextArea" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+         </AnchorPane>
+      </SplitPane>
+   </center>
+   <left>
+      <ListView fx:id="usersList" prefHeight="200.0" prefWidth="201.0" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>
