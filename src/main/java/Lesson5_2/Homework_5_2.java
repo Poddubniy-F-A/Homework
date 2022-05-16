@@ -4,12 +4,16 @@ public class Homework_5_2 {
     static final int size = 1_000_000;
     static final int halfSize = 500_000;
 
-    public static void main(String[] args) throws InterruptedException {
-        Method1();
-        Method2();
+    public static void main(String[] args) {
+        method1();
+        try {
+            method2();
+        } catch (InterruptedException e) {
+            System.out.println("Работу потока хотят завершить досрочно");
+        }
     }
 
-    public static void Method1() {
+    public static void method1() {
         float[] array = new float[size];
         for (int i = 0; i < size; i++) {
             array[i] = 1.0f;
@@ -23,7 +27,7 @@ public class Homework_5_2 {
         System.out.println("Ушло времени на выполнение первого метода: " + (System.currentTimeMillis() - time) + " мс");
     }
 
-    public static void Method2() throws InterruptedException {
+    public static void method2() throws InterruptedException {
         float[] array = new float[size];
         for (int i = 0; i < size; i++) {
             array[i] = 1.0f;
