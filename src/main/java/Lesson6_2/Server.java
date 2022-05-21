@@ -3,21 +3,29 @@ package Lesson6_2;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Homework_6_2 {
+public class Server {
+    private static final int PORT = 5000;
+
     public static void main(String[] args) throws IOException {
-        new Homework_6_2().start("localhost", 5000);
+        new Server().start(PORT);
     }
 
-    public void start(String host, int port) {
+    public void start(int port) throws IOException {
+        ServerSocket serverSocket = null;
+        Socket clientSocket = null;
         Thread inputThread = null;
 
-        try (Socket socket = new Socket(host, port)) {
-            System.out.println("Клиент запущен");
-            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+        try {
+            serverSocket = new ServerSocket(port);
+            System.out.println("Сервер запущен");
+            clientSocket = serverSocket.accept();
+            System.out.println("Клиент подключился");
+            DataInputStream dataInputStream = new DataInputStream(clientSocket.getInputStream());
+            DataOutputStream dataOutputStream = new DataOutputStream(clientSocket.getOutputStream());
 
             inputThread = runInputLoop(dataInputStream);
             runOutputLoop(dataOutputStream);
@@ -27,6 +35,12 @@ public class Homework_6_2 {
             if (inputThread != null) {
                 inputThread.interrupt();
             }
+            if (clientSocket != null) {
+                clientSocket.close();
+            }
+            if (serverSocket != null) {
+                serverSocket.close();
+            }
         }
     }
 
@@ -35,7 +49,7 @@ public class Homework_6_2 {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
                     String message = dataInputStream.readUTF();
-                    System.out.println("Сервер: " + message);
+                    System.out.println("Клиент: " + message);
                     if (message.startsWith("/end")) {
                         System.exit(0);
                     }
@@ -45,7 +59,6 @@ public class Homework_6_2 {
                     break;
                 }
             }
-
         });
         thread.start();
         return thread;
