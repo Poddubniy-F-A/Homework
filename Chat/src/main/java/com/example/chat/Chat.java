@@ -21,10 +21,10 @@ public class Chat extends Application {
         fxmlLoader.setLocation(Chat.class.getResource("Scheme.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
-        this.stage.setTitle("Chat");
+        this.stage.setTitle("Чат");
         this.stage.setScene(scene);
         Controller controller = fxmlLoader.getController();
-        controller.usersList.getItems().addAll("User1", "User2");
+        controller.usersList.getItems().addAll("Пользователь1", "Пользователь2");
         stage.show();
         this.connectToServer(controller);
     }

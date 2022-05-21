@@ -46,7 +46,7 @@ public class Server {
             try {
                 String message = dataInputStream.readUTF();
                 if (!message.startsWith("/end")) {
-                    dataOutputStream.writeUTF("Echo: " + message);
+                    dataOutputStream.writeUTF("Эхо: " + message);
                     continue;
                 }
             } catch (IOException var3) {

@@ -50,17 +50,9 @@ public class Controller {
 
     }
 
-    public Network getNetwork() {
-        return this.network;
-    }
-
     public void setNetwork(Network network) {
         this.network = network;
         network.waitMessages(this::send);
-    }
-
-    public Chat getApplication() {
-        return this.application;
     }
 
     public void setApplication(Chat application) {

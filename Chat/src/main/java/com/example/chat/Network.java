@@ -30,8 +30,8 @@ public class Network {
             this.socketInput = new DataInputStream(this.socket.getInputStream());
             this.socketOutput = new DataOutputStream(this.socket.getOutputStream());
             return true;
-        } catch (IOException var2) {
-            var2.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -39,9 +39,9 @@ public class Network {
     public void sendMessage(String message) throws IOException {
         try {
             this.socketOutput.writeUTF(message);
-        } catch (IOException var3) {
+        } catch (IOException e) {
             System.err.println("Не удалось отправить сообщение на сервер");
-            throw var3;
+            throw e;
         }
     }
 
@@ -51,7 +51,7 @@ public class Network {
                 try {
                     String message = this.socketInput.readUTF();
                     messageHandler.accept(message);
-                } catch (IOException var3) {
+                } catch (IOException e) {
                     System.err.println("Не удалось получить сообщение от сервера");
                     return;
                 }
@@ -64,7 +64,7 @@ public class Network {
     public void close() {
         try {
             this.socket.close();
-        } catch (IOException var2) {
+        } catch (IOException e) {
             System.err.println("Не удалось закрыть сетевое соединение");
         }
 
