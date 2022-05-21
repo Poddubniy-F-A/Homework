@@ -1,24 +1,53 @@
 package com.example.chat;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class Chat extends Application {
-    @Override
+    private Stage stage;
+
+    public Chat() {
+    }
+
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Chat.class.getResource("Scheme.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Chat");
-        stage.setScene(scene);
-
+        this.stage = stage;
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(Chat.class.getResource("Scheme.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        this.stage.setTitle("Чат");
+        this.stage.setScene(scene);
         Controller controller = fxmlLoader.getController();
-        controller.usersList.getItems().addAll("User1", "User2");
-
+        controller.usersList.getItems().addAll("Пользователь1", "Пользователь2");
         stage.show();
+        this.connectToServer(controller);
+    }
+
+    private void connectToServer(Controller clientController) {
+        Network network = new Network();
+        boolean resultConnectedToServer = network.connect();
+        if (!resultConnectedToServer) {
+            String errorMessage = "Невозможно установить сетевое соединение";
+            System.err.println(errorMessage);
+            this.showErrorDialog(errorMessage);
+        }
+
+        clientController.setNetwork(network);
+        clientController.setApplication(this);
+        this.stage.setOnCloseRequest((windowEvent) -> network.close());
+    }
+
+    public void showErrorDialog(String message) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Ошибка");
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public static void main(String[] args) {
